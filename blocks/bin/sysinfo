@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+fa_area_chart='\U000f1fe'
+
+fa_thermometer='\U000f2c7'
+fa_thermometer_0='\U000f2cb'
+fa_thermometer_4='\U000f2c7'
+fa_thermometer_quarter='\U000f2ca'
+fa_thermometer_3='\U000f2c8'
+fa_thermometer_half='\U000f2c9'
+
+fa_wifi='\U000f1eb'
+fa_arrow_circle_o_down='\U000f01a'
+fa_arrow_circle_o_up='\U000f01b'
+
+fa_database='\U000f1c0'
+
+fa_tasks='\U000f0ae'
+
+fa_battery_full='\U000f240'
+fa_batterry_three_quarters='\U000f241'
+fa_batterry_half='\U000f242'
+fa_batterry_quarter='\U000f243'
+fa_batterry_empty='\U000f244'
+
+fa_terminal='\U000f120'

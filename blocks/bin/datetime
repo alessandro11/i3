@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+fa_calendar_o='\U000f133'
+dow=`date '+%a'`
+dom=`date '+%d'`
+mon=`date '+%b'`
+year=`date '+%Y'`
+hour_min=`date '+%H:%M'`
+
+sec=`date '+%S'`
+color='#fdfefe'
+if [ $(($sec % 2)) -eq 0 ]; then
+	color='#17202a'
+fi
+
+echo -e "<span foreground='#48c9b0' font_desc='EmojiSymbols'>$fa_calendar_o</span>"\
+	 "<span foreground='#fdfefe'>$dow</span>"\
+	 "<span foreground='#48c9b0'>$dom</span>"\
+	 "<span foreground='#fdfefe'>$mon $year $hour_min</span><span foreground='$color'>:</span><span foreground='#fdfefe'>$sec</span>"
+
+exit 0

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+#dow=`date '+%a'`
+#dom=`date '+%d'`
+#mon=`date '+%b'`
+#year=`date '+%Y'`
+#time=`date '+%T'`
+
+#echo -e "<span foreground='#48c9b0' font_desc='EmojiSymbols'>\U000f274</span> <span foreground='#fdfefe'>$dow </span><span foreground='#48c9b0'>$dom</span><span foreground='#fdfefe'> $mon $year $time</span>"
+
+#echo -e "<span foreground='#48c9b0' font_desc='EmojiSymbols'>\U000f274</span>"
+echo "deu"
+exit 0
