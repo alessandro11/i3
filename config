@@ -195,7 +195,7 @@ bar {
     position top
     workspace_buttons yes
     status_command $HOME/.config-scripts/dock/sysinfo.py
-    #status_command i3blocks -c $HOME/.config/i3/sysinfo.conf
+    #status_command i3blocks -c ~/Documents/projects/i3blocks-custom/sysinfo.conf
     tray_output none
     colors {
     	background #1f1f1f
@@ -212,7 +212,7 @@ bar {
     position top
     output HDMI-1
     #status_command $HOME/.config-scripts/dock/clock.py
-    status_command i3blocks -c $HOME/.config/i3/i3blocks.conf
+    status_command i3blocks -c $HOME/.config/i3/clock.conf
     tray_output none
     colors {
     	background #1f1f1f
