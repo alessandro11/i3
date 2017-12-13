@@ -201,9 +201,12 @@ bar {
     	background #1f1f1f
 	    statusline #605c5a
         # Item              border   bg   fg
-    	focused_workspace #101010 #101010 #51df1d
-	    active_workspace #3300FF #101010 #101010
-        inactive_workspace #222222 #222222 #ffffff
+        # active_workspace occurrs when workpsace has no focus, highlight
+        #   workspace that was focused
+	    active_workspace #008066 #101010 #00800
+        # Actual workpsace active
+    	focused_workspace #80ffe5 #101010 #51df1d
+        inactive_workspace #1f1f1f #222222 #00800
         urgent_workspace #2e3436 #9a878f
     } 
 }
@@ -218,9 +221,12 @@ bar {
     	background #1f1f1f
 	    statusline #605c5a
         # Item              border   bg   fg
-    	focused_workspace #101010 #101010 #51df1d
-	    active_workspace #3300FF #101010 #101010
-        inactive_workspace #222222 #222222 #A0A0A0
+        # active_workspace occurrs when workpsace has no focus, highlight
+        #   workspace that was focused
+	    active_workspace #008066 #101010 #00800
+        # Actual workpsace active
+    	focused_workspace #80ffe5 #101010 #51df1d
+        inactive_workspace #1f1f1f #222222 #00800
         urgent_workspace #2e3436 #9a878f
     } 
 
