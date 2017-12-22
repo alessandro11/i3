@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 fa_calendar_o='\U000f133'
+fa_clock_o='\U000f017'
+
 dow=`date '+%a'`
 dom=`date '+%d'`
 mon=`date '+%b'`
@@ -16,6 +18,7 @@ fi
 echo -e "<span foreground='#48c9b0' font_desc='EmojiSymbols'>$fa_calendar_o</span>"\
 	 "<span foreground='#fdfefe'>$dow</span>"\
 	 "<span foreground='#48c9b0'>$dom</span>"\
-	 "<span foreground='#fdfefe'>$mon $year $hour_min</span><span foreground='$color'>:</span><span foreground='#fdfefe'>$sec</span>"
+	 "<span foreground='#fdfefe'>$mon $year</span>"\
+	 "<span foreground='#0099ff' font_desc='EmojiSymbols'>$fa_clock_o $hour_min</span><span foreground='$color'>:</span><span foreground='#0099ff'>$sec</span>"
 
 exit 0
