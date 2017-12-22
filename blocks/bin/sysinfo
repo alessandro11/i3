@@ -24,3 +24,11 @@ fa_batterry_quarter='\U000f243'
 fa_batterry_empty='\U000f244'
 
 fa_terminal='\U000f120'
+
+# Get average user usage of cpu
+cpu() {
+	echo "$(awk '/^cpu[0-9]+/ {sum+=$2; count++} END{OFMT="%.2f"; print sum/count}' /proc/stat)Hz"
+}
+
+echo $(cpu)
+true
