@@ -6,33 +6,44 @@ fa_thermometer_3='\U000f2c8'
 fa_thermometer_half='\U000f2c9'
 fa_thermometer_full='\U000f2c7'
 
-CHIP="coretemp-isa-0000"
+fa_modx='\U000f285'
 
-fa_area_chart='\U000f1fe'
+CHIP="coretemp-isa-000"
+FAN_CHIP_SENSORS="dell_smm-virtual-0"
 
-fa_wifi='\U000f1eb'
-fa_arrow_circle_o_down='\U000f01a'
-fa_arrow_circle_o_up='\U000f01b'
+#fa_area_chart='\U000f1fe'
 
-fa_database='\U000f1c0'
+#fa_wifi='\U000f1eb'
+#fa_arrow_circle_o_down='\U000f01a'
+#fa_arrow_circle_o_up='\U000f01b'
 
-fa_tasks='\U000f0ae'
+#fa_database='\U000f1c0'
 
-fa_battery_full='\U000f240'
-fa_batterry_three_quarters='\U000f241'
-fa_batterry_half='\U000f242'
-fa_batterry_quarter='\U000f243'
-fa_batterry_empty='\U000f244'
+#fa_battery_full='\U000f240'
+#fa_batterry_three_quarters='\U000f241'
+# fa_batterry_half='\U000f242'
+# fa_batterry_quarter='\U000f243'
+# fa_batterry_empty='\U000f244'
 
-fa_terminal='\U000f120'
+# fa_terminal='\U000f120'
 
 fa_microship='\U000f2db'
+
+fa_asterisk='\U000f069'
 
 # Get average user usage of cpu
 cpu() {
 	echo "$(awk '/^cpu MHz/ {sum+=$4; count++} END{OFMT="%.2f"; print sum/count}' /proc/cpuinfo)MHz"
 }
 
+cpu_fan() {
+	local rpm=0
+
+	rpm=`sensors -u dell_smm-virtual-0 | awk '/fan1_input:/ {print $2}'`
+	echo ${rpm%%\.[0-9]*}
+}
+
+# Get the average temperature of all cpus.
 temperature() {
 	local mean_t=0
 
@@ -54,9 +65,10 @@ temperature() {
 	echo $mean_t
 }
 
+
 mean_t=$(temperature)
 if [[ $mean_t < 50.00 ]]; then
-	color="blue"
+	color="#53ff1a"
 	cpu_usage_color='#53ff1a'
 	icon="$fa_thermometer_0"
 elif [[ $mean_t < 60.00 ]]; then
@@ -71,4 +83,7 @@ fi
 
 echo -e "<span foreground='red' font_desc='EmojiSymbols'>$fa_microship</span>"\
 	 "<span foreground='$cpu_usage_color'>$(cpu)</span>"\
-	 "<span foreground='$color' font_desc='EmojiSymbols'>$icon $mean_t°C</span>"
+	 "<span foreground='$color' font_desc='EmojiSymbols'>$icon $mean_t°C</span>"\
+	 "<span foreground='#53ff1a' size='x-small' font_desc='fontawesome-regular'>$fa_modx $(cpu_fan) RPM</span>"
+
+exit 0
