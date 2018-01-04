@@ -195,7 +195,7 @@ bar {
     position top
     workspace_buttons yes
     #status_command $HOME/.config-scripts/dock/sysinfo.py
-    status_command i3blocks -c $HOME/.config/i3/i3blocks.conf
+    status_command i3blocks -c $HOME/.config/i3/i3blocks2.conf
     tray_output none
     colors {
     	background #1f1f1f
@@ -215,7 +215,7 @@ bar {
     position top
     output LVDS1
     #status_command $HOME/.config-scripts/dock/clock.py
-    status_command i3blocks -c $HOME/.config/i3/i3blocks2.conf
+    status_command i3blocks -c $HOME/.config/i3/i3blocks.conf
     tray_output none
     colors {
     	background #1f1f1f
