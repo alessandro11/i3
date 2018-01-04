@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+CHIP="coretemp-isa-0000"
+
+set -x
+temps=(`sensors -u coretemp-isa-0000 |\awk '/temp[0-9]+_input:/ {print $2}'`)
+echo ${temps[@]}
+
+count=${#temps[@]}
+calc="scale=2; (${temps[0]}"
+unset 'temps[0]'
+for temp in ${temps[@]}; do
+	calc="$calc + $temp"
+done
+calc="$calc) / $count"
+echo "$calc" | bc
