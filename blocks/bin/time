@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+fa_clock_o='\U000f017'
+
+hour_min=`date '+%T'`
+sec=${hour_min##[0-9]*:}
+hour_min=${hour_min%:*[0-9]}
+color='#fdfefe'
+
+if [ $(($sec % 2)) -eq 0 ]; then
+	color='#17202a'
+fi
+
+echo -e "<span foreground='#53ff1a' size='x-large' font_desc='EmojiSymbols'>$fa_clock_o $hour_min</span><span foreground='$color'>:</span><span foreground='#53ff1a' size='small'>$sec</span>"
+
+exit 0
