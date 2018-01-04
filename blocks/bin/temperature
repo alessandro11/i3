@@ -1,16 +1,39 @@
 #!/usr/bin/env bash
 
+fa_thermometer_0='\U000f2cb'
+fa_thermometer_quarter='\U000f2ca'
+fa_thermometer_3='\U000f2c8'
+fa_thermometer_half='\U000f2c9'
+fa_thermometer_full='\U000f2c7'
+
 CHIP="coretemp-isa-0000"
 
 set -x
-temps=(`sensors -u coretemp-isa-0000 |\awk '/temp[0-9]+_input:/ {print $2}'`)
-echo ${temps[@]}
+mean_t=`sensors -u $CHIP |\
+	awk '
+		BEGIN {
+			count=0
+		}
 
-count=${#temps[@]}
-calc="scale=2; (${temps[0]}"
-unset 'temps[0]'
-for temp in ${temps[@]}; do
-	calc="$calc + $temp"
-done
-calc="$calc) / $count"
-echo "$calc" | bc
+		/temp[0-9]+_input:/ {
+			temps+=$2
+			count++
+		}
+
+		END {
+			printf("%.2f\n", temps/count)
+	   }
+'`
+
+if [[ $mean_t < 50.00 ]]; then
+	color="blue"
+	icon="$fa_thermometer_0"
+elif [[ $mean_t < 60.00 ]]; then
+	color="yellow"
+	icon="$fa_thermometer_3"
+else
+	color="red"
+	icon="$fa_thermometer_full"
+fi
+
+echo -e "<span foreground='$color' font_desc='EmojiSymbols'>$icon $mean_t°C</span>"
