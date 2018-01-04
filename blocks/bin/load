@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+fa_tasks='\U000f0ae'
+
+set -x
+load=`uptime | grep --only-matching 'load average:.*'`
+load=${load#load average: *}
+loads=`awk -F',' 'END{ printf("%.1f%%, %.1f%%, %.1f%%", $1*100, $2*100, $3*100) }' <<< $load`
+
+echo -e "<span foreground='#53ff1a'>$fa_tasks $loads</span>"
+
+exit 0
