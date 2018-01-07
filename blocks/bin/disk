@@ -7,12 +7,10 @@
 # ANY VARS DECLARED IN ANOTHER SOURCE FILE WON'T WORK.
 # . sys.conf
 
-fa_tasks='\U000f0ae'
+fa_hdd_o='\U000f0a0'
 
-load=`uptime | grep --only-matching 'load average:.*'`
-load=${load#load average: *}
-loads=`awk -F',' 'END{ printf("%.1f%%, %.1f%%, %.1f%%", $1*100, $2*100, $3*100) }' <<< $load`
+tx_used=`df --local --human-readable --output=target,used,size,pcent | awk '/^[/] / {printf("%s/%s (%s)", $2, $3, $4)}'`
 
-echo -e "<span foreground='#53ff1a'>$fa_tasks $loads</span>"
+echo -e "<span foreground='#53ff1a'>$fa_hdd_o $tx_used</span>"
 
 exit 0

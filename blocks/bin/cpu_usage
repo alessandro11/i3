@@ -1,4 +1,11 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
+
+# BUG: THRE IS NO WAY TO SOURCE A FILE.
+#      i3blocks does not even respect which environment
+# that is running the script, always run with user default
+# shell script.
+# ANY VARS DECLARED IN ANOTHER SOURCE FILE WON'T WORK.
+# . sys.conf
 
 fa_thermometer_0='\U000f2cb'
 fa_thermometer_quarter='\U000f2ca'
@@ -8,28 +15,9 @@ fa_thermometer_full='\U000f2c7'
 
 fa_modx='\U000f285'
 
-CHIP="coretemp-isa-000"
-FAN_CHIP_SENSORS="dell_smm-virtual-0"
-
-#fa_area_chart='\U000f1fe'
-
-#fa_wifi='\U000f1eb'
-#fa_arrow_circle_o_down='\U000f01a'
-#fa_arrow_circle_o_up='\U000f01b'
-
-#fa_database='\U000f1c0'
-
-#fa_battery_full='\U000f240'
-#fa_batterry_three_quarters='\U000f241'
-# fa_batterry_half='\U000f242'
-# fa_batterry_quarter='\U000f243'
-# fa_batterry_empty='\U000f244'
-
-# fa_terminal='\U000f120'
-
 fa_microship='\U000f2db'
 
-fa_asterisk='\U000f069'
+fa_gears='\U000f085'
 
 # Get average user usage of cpu
 cpu() {
@@ -74,14 +62,14 @@ if [[ $mean_t < 50.00 ]]; then
 elif [[ $mean_t < 60.00 ]]; then
 	color="yellow"
 	cpu_usage_color="yellow"
-	icon="$fa_thermometer_3"
+	icon="$fa_thermometer_half"
 else
 	color="red"
 	cpu_usage_color="red"
 	icon="$fa_thermometer_full"
 fi
 
-echo -e "<span foreground='red' font_desc='EmojiSymbols'>$fa_microship</span>"\
+echo -e "<span foreground='red' font_desc='EmojiSymbols'>$fa_gears</span>"\
 	 "<span foreground='$cpu_usage_color'>$(cpu)</span>"\
 	 "<span foreground='$color' font_desc='EmojiSymbols'>$icon $mean_t°C</span>"\
 	 "<span foreground='#53ff1a' size='x-small' font_desc='fontawesome-regular'>$fa_modx $(cpu_fan) RPM</span>"

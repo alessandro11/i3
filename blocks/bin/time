@@ -1,4 +1,11 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
+
+# BUG: THRE IS NO WAY TO SOURCE A FILE.
+#      i3blocks does not even respect which environment
+# that is running the script, always run with user default
+# shell script.
+# ANY VARS DECLARED IN ANOTHER SOURCE FILE WON'T WORK.
+# . sys.conf
 
 fa_clock_o='\U000f017'
 
