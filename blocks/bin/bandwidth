@@ -1,0 +1,30 @@
+#!/usr/bin/env sh
+
+# BUG: THRE IS NO WAY TO SOURCE A FILE.
+#      i3blocks does not even respect which environment
+# that is running the script, always run with user default
+# shell script.
+# ANY VARS DECLARED IN ANOTHER SOURCE FILE WON'T WORK.
+# . sys.conf
+
+IFACE="br0"
+
+fa_sitemap='\U000f0e8'
+fa_arrow_circle_o_down='\U000f01a'
+fa_caret_down='\U000f0d7'
+fa_caret_up='\U000f0d8'
+fa_arrow_circle_o_up='\U000f01b'
+
+bw=(`ifstat --ignore | awk '/^'"$IFACE"'/ { print $7, $9 }'`)
+
+color_up='#4dff4d'
+color_down='#ff0000'
+[ ${bw[0]} -eq 0 ] && color_down='#800000'
+[ ${bw[1]} -eq 0 ] && color_up='#004d00'
+
+echo -e "<span foreground='#53ff1a'>$fa_sitemap ${bw[0]}</span>"\
+	 "<span foreground='$color_down'>$fa_caret_down</span>"\
+	 "<span foreground='#53ff1a'>${bw[1]}</span>"\
+	 "<span foreground='$color_up'>$fa_caret_up</span>"
+
+exit 0
