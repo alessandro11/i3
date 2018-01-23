@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # BUG: THRE IS NO WAY TO SOURCE A FILE.
 #      i3blocks does not even respect which environment

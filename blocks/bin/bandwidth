@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # BUG: THRE IS NO WAY TO SOURCE A FILE.
 #      i3blocks does not even respect which environment
@@ -15,7 +15,7 @@ fa_caret_down='\U000f0d7'
 fa_caret_up='\U000f0d8'
 fa_arrow_circle_o_up='\U000f01b'
 
-bw=(`ifstat --ignore | awk '/^'"$IFACE"'/ { print $7, $9 }'`)
+bw=(`ifstat -i brxlfc -n -T 1 1 | awk '/^   [0-9]*/ { print $3, $4 }'`)
 
 color_up='#4dff4d'
 color_down='#ff0000'
