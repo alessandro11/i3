@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # BUG: THRE IS NO WAY TO SOURCE A FILE.
 #      i3blocks does not even respect which environment
@@ -27,7 +27,7 @@ cpu() {
 cpu_fan() {
 	local rpm=0
 
-	rpm=`sensors -u dell_smm-virtual-0 | awk '/fan1_input:/ {print $2}'`
+	rpm=`sensors -u coretemp-isa-0000 | awk '/fan1_input:/ {print $2}'`
 	echo ${rpm%%\.[0-9]*}
 }
 
@@ -35,7 +35,7 @@ cpu_fan() {
 temperature() {
 	local mean_t=0
 
-	mean_t=`sensors -u $CHIP |\
+	mean_t=`sensors -u |\
 	awk '
 		BEGIN {
 			count=0
