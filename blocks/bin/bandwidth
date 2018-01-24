@@ -15,12 +15,17 @@ fa_caret_down='\U000f0d7'
 fa_caret_up='\U000f0d8'
 fa_arrow_circle_o_up='\U000f01b'
 
-bw=(`ifstat --ignore | awk '/^'"$IFACE"'/ { print $7, $9 }'`)
+bw=(`ifstat --ignore --pretty | awk '/'"$IFACE"'/ { print $7, $9 }'`)
 
 color_up='#4dff4d'
 color_down='#ff0000'
-[ ${bw[0]} -eq 0 ] && color_down='#800000'
-[ ${bw[1]} -eq 0 ] && color_up='#004d00'
+set -x
+rx_rate=${bw[0]}
+rx_rate=${rx_rate%[a-zA-Z]*}
+tx_rate=${bw[1]}
+tx_rate=${tx_rate%[a-zA-Z]*}
+[ $rx_rate -eq 0 ] && color_down='#800000'
+[ $tx_rate -eq 0 ] && color_up='#004d00'
 
 echo -e "<span foreground='#53ff1a'>$fa_sitemap ${bw[0]}</span>"\
 	 "<span foreground='$color_down'>$fa_caret_down</span>"\
