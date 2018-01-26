@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # BUG: THRE IS NO WAY TO SOURCE A FILE.
 #      i3blocks does not even respect which environment
@@ -15,21 +15,43 @@ fa_caret_down='\U000f0d7'
 fa_caret_up='\U000f0d8'
 fa_arrow_circle_o_up='\U000f01b'
 
-bw=(`ifstat --ignore --pretty | awk '/'"$IFACE"'/ { print $7, $9 }'`)
+GetHummanReadble() {
+	local val=$1
+	local ret=""
+
+	if [ $val -lt 1024 ]; then # less than KB
+		ret="${val}B/s"
+	elif [ $val -lt 1048576 ]; then  # less than MB
+		ret="$(($val / 1024))KB/s"
+	elif [ $val -lt 1073741824 ]; then # less than GB
+		ret="$(($val / 1048576))MB/s"
+	else
+		ret="$(($val / 1073741824))GB/s"
+	fi
+
+	echo "$ret"
+}
+
+[ ! -f "/tmp/rx_tx_bytes" ] && echo 0 > "/tmp/rx_tx_bytes"
+
+rx_tx_old=(`cat /tmp/rx_tx_bytes`)
+bw=(`awk '/'"$IFACE"'/ {print $2, $10}' /proc/net/dev`)
+
+rx_rate=$((${bw[0]} - ${rx_tx_old[0]}))
+tx_rate=$((${bw[1]} - ${rx_tx_old[1]}))
+echo ${bw[@]} > "/tmp/rx_tx_bytes"
 
 color_up='#4dff4d'
 color_down='#ff0000'
-set -x
-rx_rate=${bw[0]}
-rx_rate=${rx_rate%[a-zA-Z]*}
-tx_rate=${bw[1]}
-tx_rate=${tx_rate%[a-zA-Z]*}
 [ $rx_rate -eq 0 ] && color_down='#800000'
 [ $tx_rate -eq 0 ] && color_up='#004d00'
 
-echo -e "<span foreground='#53ff1a'>$fa_sitemap ${bw[0]}</span>"\
+rx_rate=$(GetHummanReadble $rx_rate)
+tx_rate=$(GetHummanReadble $tx_rate)
+
+echo -e "<span foreground='#53ff1a'>$fa_sitemap $rx_rate</span>"\
 	 "<span foreground='$color_down'>$fa_caret_down</span>"\
-	 "<span foreground='#53ff1a'>${bw[1]}</span>"\
+	 "<span foreground='#53ff1a'>$tx_rate</span>"\
 	 "<span foreground='$color_up'>$fa_caret_up</span>"
 
 exit 0
