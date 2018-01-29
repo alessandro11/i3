@@ -13,17 +13,17 @@ set $mod Mod4
 
 default_orientation horizontal
 
-workspace "1:www" output HDMI1
-workspace 2 output HDMI1
-workspace 3 output HDMI1
-workspace "4:edit" output HDMI1
-workspace "5:email" output HDMI1
-workspace "6:remote" output HDMI1
+workspace "1:www" output VGA-1
+workspace 2 output VGA-1
+workspace 3 output VGA-1
+workspace "4:edit" output VGA-1
+workspace "5:email" output VGA-1
+workspace "6:remote" output VGA-1
 #
-workspace "10:URxvt" output LVDS1
-workspace 9 output LVDS1
-workspace 8 output LVDS1
-workspace 7 output LVDS1
+workspace "10:URxvt" output HDMI-1
+workspace 9 output HDMI-1
+workspace 8 output HDMI-1
+workspace 7 output HDMI-1
 
 # https://i3wm.org/docs/userguide.html#assign_workspace
 # Assignments
