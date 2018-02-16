@@ -13,6 +13,7 @@ fa_battery_half='\U000f242'
 fa_battery_three_quarters='\U000f241'
 fa_battery_full='\U000f240'
 fa_plug='\U000f1e6'
+fa_ban='\U000f05e'
 
 DEFAULT_FGCOLOR='#53ff1a'
 
@@ -39,6 +40,12 @@ get_icon() {
 
 	echo "$icon"
 }
+
+if [ ! -d "/sys/class/power_supply/BAT0" ]; then
+	echo -e "<span foreground='$DEFAULT_FGCOLOR' size='large' font_desc='EmojiSymbols'>${fa_ban}${fa_battery_empty}</span>"
+
+	exit 0
+fi
 
 CAPACITY=`cat /sys/class/power_supply/BAT0/capacity`
 #CAPACITY=76
@@ -72,3 +79,5 @@ else
 fi
 
 echo -e "$NOTIFY"
+
+exit 0
