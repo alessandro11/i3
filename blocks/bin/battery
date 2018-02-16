@@ -48,10 +48,11 @@ DESCRIPTION=""
 
 STATUS=`cat /sys/class/power_supply/BAT0/status`
 #STATUS="Discharging"
+DESCRIPTION="`acpi -b | awk -F',' '{print $3}'`"
 if [ "$STATUS" == "Charging" ]; then
 	ICON="$(get_icon)"
-	DESCRIPTION="`acpi -b | grep -o '[0-9]*:[0-9]*:[0-9]*'` until charged"
-	NOTIFY="<span foreground='$COLOR' size='x-small' font_desc='EmojiSymbols'>$fa_plug</span><span foreground='$COLOR' size='large' font_desc='EmojiSymbols'> $(get_icon)</span><span foreground='$COLOR' size='x-small' font_desc='EmojiSymbols'> ${CAPACITY}% $DESCRIPTION</span>"
+	#DESCRIPTION="`acpi -b | grep -o '[0-9]*:[0-9]*:[0-9]*'` until charged"
+	NOTIFY="<span foreground='$COLOR' size='x-small' font_desc='EmojiSymbols'>$fa_plug</span><span foreground='$COLOR' size='large' font_desc='EmojiSymbols'> $(get_icon)</span><span foreground='$COLOR' size='small' font_desc='EmojiSymbols'> ${CAPACITY}%${DESCRIPTION}</span>"
 else
 	if [ $CAPACITY -le 10 ]; then
 		ICON="$fa_battery_empty"
@@ -66,7 +67,6 @@ else
 		ICON="$fa_battery_full"
 	fi
 
-	DESCRIPTION="`acpi -b | grep -o '[0-9]*:[0-9]*:[0-9]*'` remaining"
 	NOTIFY="<span foreground='$COLOR' size='large' font_desc='EmojiSymbols'>$ICON</span><span foreground='$COLOR' size='x-small' font_desc='EmojiSymbols'> $CAPACITY% $DESCRIPTION</span>"
 
 fi
