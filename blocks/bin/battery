@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+
+# BUG: THRE IS NO WAY TO SOURCE A FILE.
+#      i3blocks does not even respect which environment
+# that is running the script, always run with user default
+# shell script.
+# ANY VARS DECLARED IN ANOTHER SOURCE FILE WON'T WORK.
+# . sys.conf
+
+fa_battery_empty='\U000f244'
+fa_battery_quarter='\U000f243'
+fa_battery_half='\U000f242'
+fa_battery_three_quarters='\U000f241'
+fa_battery_full='\U000f240'
+fa_plug='\U000f1e6'
+
+DEFAULT_FGCOLOR='#53ff1a'
+
+toggle_color() {
+	local num=0, color="$1"
+
+	num=`date +%s`
+	[ $(($num % 2)) -eq 1 ] && color='#ff0000'
+
+	echo "$color"
+}
+
+get_icon() {
+	local num=0
+
+	num=`date +%s`
+	case $(($num % 5)) in
+		1) icon="$fa_battery_empty" ;;
+		2) icon="$fa_battery_quarter";;
+		3) icon="$fa_battery_half";;
+		4) icon="$fa_battery_three_quarters";;
+		0) icon="$fa_battery_full";;
+	esac
+
+	echo "$icon"
+}
+
+CAPACITY=`cat /sys/class/power_supply/BAT0/capacity`
+#CAPACITY=76
+COLOR="$DEFAULT_FGCOLOR"
+ICON=""
+DESCRIPTION=""
+
+STATUS=`cat /sys/class/power_supply/BAT0/status`
+#STATUS="Discharging"
+if [ "$STATUS" == "Charging" ]; then
+	ICON="$(get_icon)"
+	DESCRIPTION="`acpi -b | grep -o '[0-9]*:[0-9]*:[0-9]*'` until charged"
+	NOTIFY="<span foreground='$COLOR' size='x-small' font_desc='EmojiSymbols'>$fa_plug</span><span foreground='$COLOR' size='large' font_desc='EmojiSymbols'> $(get_icon)</span><span foreground='$COLOR' size='x-small' font_desc='EmojiSymbols'> ${CAPACITY}% $DESCRIPTION</span>"
+else
+	if [ $CAPACITY -le 10 ]; then
+		ICON="$fa_battery_empty"
+		COLOR=$(toggle_color $DEFAULT_FGCOLOR)
+	elif [ $CAPACITY -le 25 ]; then
+		ICON="$fa_battery_quarter"
+	elif [ $CAPACITY -le 50 ]; then
+		ICON="$fa_battery_half"
+	elif [ $CAPACITY -le 75 ]; then
+		ICON="$fa_battery_three_quarters"
+	else
+		ICON="$fa_battery_full"
+	fi
+
+	DESCRIPTION="`acpi -b | grep -o '[0-9]*:[0-9]*:[0-9]*'` remaining"
+	NOTIFY="<span foreground='$COLOR' size='large' font_desc='EmojiSymbols'>$ICON</span><span foreground='$COLOR' size='x-small' font_desc='EmojiSymbols'> $CAPACITY% $DESCRIPTION</span>"
+
+fi
+
+echo -e "$NOTIFY"
