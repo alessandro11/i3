@@ -19,9 +19,11 @@ fa_microship='\U000f2db'
 
 fa_gears='\U000f085'
 
+CHIP="coretemp-isa-0000"
+
 # Get average user usage of cpu
 cpu() {
-	echo "$(awk '/^cpu MHz/ {sum+=$4; count++} END{OFMT="%.2f"; print sum/count}' /proc/cpuinfo)MHz"
+	echo "$(awk '/^cpu MHz/ {sum+=$4; count++} END{OFMT="%.2f"; print (sum/count)/1000}' /proc/cpuinfo)GHz"
 }
 
 cpu_fan() {
