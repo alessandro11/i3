@@ -9,8 +9,9 @@
 
 fa_hdd_o='\U000f0a0'
 
-tx_used=`df --local --human-readable --output=target,used,size,pcent | awk '/^[/] / {printf("%s/%s (%s)", $2, $3, $4)}'`
+tx_used=`df --local --human-readable --output=target,used,size,pcent | awk '/^[/] / {printf("%s/%s %s", $2, $3, $4)}'`
 
-echo -e "<span foreground='#53ff1a'>$fa_hdd_o $tx_used</span>"
+echo -e "<span foreground='#53ff1a' size='large'>$fa_hdd_o</span>"\
+	 "<span foreground='#53ff1a' size='small'>$tx_used</span>"
 
 exit 0

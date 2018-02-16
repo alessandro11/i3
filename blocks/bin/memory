@@ -59,7 +59,7 @@ get_memory_stats() {
 			pct=used/total*100
 
 			# full text
-			printf("%.1fG/%.1fG (%.f%%)\n", used, total, pct)
+			printf("%.1fG/%.1fG %.f%%\n", used, total, pct)
 
 			# short text
 			#printf("%.f%%\n", pct)
@@ -76,6 +76,15 @@ get_memory_stats() {
 		' /proc/meminfo
 }
 
-echo -e "<span foreground='#53ff1a'>$fa_microship $(get_memory_stats mem) $fa_exchange $(get_memory_stats swap)</span>"
+
+NOTIFY="<span foreground='#53ff1a' size='large'>$fa_microship</span> <span foreground='#53ff1a' size='small'>$(get_memory_stats mem)</span>"
+
+SWAP="$(get_memory_stats swap)"
+TX="`echo "$SWAP" | cut -d' ' -f2`"
+if [ ${TX%%%*} -gt 0 ]; then
+	NOTIFY="${NOTIFY} <span foreground='#53ff1a' size='large'>$fa_exchange</span> <span foreground='#53ff1a' size='small'>$SWAP</span>"
+fi
+
+echo -e "$NOTIFY"
 
 exit 0
