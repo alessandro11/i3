@@ -37,6 +37,9 @@ assign [class="Gvncviewer"] "2"
 assign [class="Spicy"] "2"
 for_window [class="Spicy"] fullscreen enable
 
+assign [class="Emulator"] "10:URxvt"
+for_window [class="Emulator"] floating enable move right 900px, move down 30px 
+
 #assign [instance="gvncviewer"] "2"
 #for_window [instance="gvncviewer"] floating enable move right 650px, move down 29px 
 #for_window [class="Gvncviewer" instance="gvncviewer"] resize set 843 1024
