@@ -19,9 +19,11 @@ fa_microship='\U000f2db'
 
 fa_gears='\U000f085'
 
+CHIP="coretemp-isa-0000"
+
 # Get average user usage of cpu
 cpu() {
-	echo "$(awk '/^cpu MHz/ {sum+=$4; count++} END{OFMT="%.2f"; print sum/count}' /proc/cpuinfo)MHz"
+	echo "$(awk '/^cpu MHz/ {sum+=$4; count++} END{OFMT="%.2f"; print (sum/count)/1000}' /proc/cpuinfo)GHz"
 }
 
 cpu_fan() {
@@ -69,8 +71,10 @@ else
 	icon="$fa_thermometer_full"
 fi
 
-echo -e "<span foreground='red' font_desc='EmojiSymbols'>$fa_gears</span>"\
-	 "<span foreground='$cpu_usage_color'>$(cpu)</span>"\
-	 "<span foreground='$color' font_desc='EmojiSymbols'>$icon $mean_t°C</span>"
+echo -e "<span foreground='red' size='large' font_desc='EmojiSymbols'>$fa_gears</span>"\
+	 "<span foreground='$cpu_usage_color' size='small'>$(cpu)</span>"\
+	 "<span foreground='$color' size='large' font_desc='EmojiSymbols'>$icon</span>"\
+	 "<span foreground='$color' size='small' font_desc='EmojiSymbols'>$mean_t°C</span>"\
+	 "<span foreground='#53ff1a' size='x-small' font_desc='fontawesome-regular'>$fa_modx $(cpu_fan) RPM</span>"
 
 exit 0

@@ -13,17 +13,17 @@ set $mod Mod4
 
 default_orientation horizontal
 
-workspace "1:www" output VGA-1
-workspace 2 output VGA-1
-workspace 3 output VGA-1
-workspace "4:edit" output VGA-1
-workspace "5:remote" output VGA-1
+workspace "1:www" output HDMI1
+workspace 2 output HDMI1
+workspace 3 output HDMI1
+workspace "4:edit" output HDMI1
+workspace "5:email" output HDMI1
+workspace "6:remote" output HDMI1
 #
-workspace "10:URxvt" output HDMI-1
-workspace 9 output HDMI-1
-workspace 8 output HDMI-1
-workspace 7 output HDMI-1
-workspace "6:email" output HDMI-1
+workspace "10:URxvt" output LVDS1
+workspace 9 output LVDS1
+workspace 8 output LVDS1
+workspace 7 output LVDS1
 
 # https://i3wm.org/docs/userguide.html#assign_workspace
 # Assignments
@@ -138,8 +138,8 @@ bindsym $mod+1 workspace "1:www"
 bindsym $mod+2 workspace 2
 bindsym $mod+3 workspace 3
 bindsym $mod+4 workspace "4:edit"
-bindsym $mod+6 workspace "5:remote"
-bindsym $mod+5 workspace "6:mail"
+bindsym $mod+5 workspace "5:mail"
+bindsym $mod+6 workspace "6:remote"
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace "8:edit"
 bindsym $mod+9 workspace 9
@@ -150,8 +150,8 @@ bindsym $mod+Shift+1 move container to workspace "1:www"
 bindsym $mod+Shift+2 move container to workspace 2
 bindsym $mod+Shift+3 move container to workspace 3
 bindsym $mod+Shift+4 move container to workspace "4:edit"
-bindsym $mod+Shift+6 move container to workspace "5:remote"
-bindsym $mod+Shift+5 move container to workspace "6:mail"
+bindsym $mod+Shift+5 move container to workspace "5:mail"
+bindsym $mod+Shift+6 move container to workspace "6:remote"
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace "8:edit"
 bindsym $mod+Shift+9 move container to workspace 9
@@ -193,12 +193,12 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-    output VGA-1
+    output HDMI1
     mode dock
     position top
     workspace_buttons yes
     #status_command $HOME/.config-scripts/dock/sysinfo.py
-    status_command i3blocks -c $HOME/.config/i3/i3blocks2.conf
+    status_command i3blocks -c $HOME/.config/i3/i3blocks-nobattery.conf
     tray_output none
     colors {
     	background #1f1f1f
@@ -216,7 +216,7 @@ bar {
 
 bar {
     position top
-    output HDMI-1
+    output LVDS1
     #status_command $HOME/.config-scripts/dock/clock.py
     status_command i3blocks -c $HOME/.config/i3/i3blocks.conf
     tray_output none

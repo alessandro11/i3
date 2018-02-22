@@ -49,9 +49,10 @@ color_down='#ff0000'
 rx_rate=$(GetHummanReadble $rx_rate)
 tx_rate=$(GetHummanReadble $tx_rate)
 
-echo -e "<span foreground='#53ff1a'>$fa_sitemap $rx_rate</span>"\
+echo -e "<span foreground='#53ff1a' size='large'>$fa_sitemap</span>"\
+	 "<span foreground='#53ff1a' size='small'>$rx_rate</span>"\
 	 "<span foreground='$color_down'>$fa_caret_down</span>"\
-	 "<span foreground='#53ff1a'>$tx_rate</span>"\
+	 "<span foreground='#53ff1a' size='small'>$tx_rate</span>"\
 	 "<span foreground='$color_up'>$fa_caret_up</span>"
 
 exit 0
