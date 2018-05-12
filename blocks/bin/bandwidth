@@ -7,9 +7,10 @@
 # ANY VARS DECLARED IN ANOTHER SOURCE FILE WON'T WORK.
 # . sys.conf
 
-IFACE="br0"
+IFACE=""
 
 fa_sitemap='\U000f0e8'
+fa_wifi='\U000f1eb'
 fa_arrow_circle_o_down='\U000f01a'
 fa_caret_down='\U000f0d7'
 fa_caret_up='\U000f0d8'
@@ -32,7 +33,26 @@ GetHummanReadble() {
 	echo "$ret"
 }
 
+GetIcon() {
+    local iface=$1 icon=""
+
+    icon="$fa_sitemap"
+    echo "/sys/class/net/$iface/wireless/" > /tmp/a
+    if [ -d "/sys/class/net/$iface/wireless" ]; then
+        icon="$fa_wifi"
+    fi
+
+    echo "$icon"        
+}
+
+IFACE=$(ip -o route show default | awk '{print $5}')
 [ ! -f "/tmp/rx_tx_bytes" ] && echo 0 > "/tmp/rx_tx_bytes"
+
+if [ -z "$IFACE" ]; then
+    echo -e "<span foreground='#48c9b0' size='large'>$fa_sitemap</span>"\
+	        "<span foreground='#53ff1a' size='small'>None</span>"
+    exit 0
+fi
 
 rx_tx_old=(`cat /tmp/rx_tx_bytes`)
 bw=(`awk '/'"$IFACE"'/ {print $2, $10}' /proc/net/dev`)
@@ -46,10 +66,12 @@ color_down='#ff0000'
 [ $rx_rate -eq 0 ] && color_down='#800000'
 [ $tx_rate -eq 0 ] && color_up='#004d00'
 
+ICON=$(GetIcon $IFACE)
+
 rx_rate=$(GetHummanReadble $rx_rate)
 tx_rate=$(GetHummanReadble $tx_rate)
 
-echo -e "<span foreground='#53ff1a' size='large'>$fa_sitemap</span>"\
+echo -e "<span foreground='#48c9b0' size='large'>$ICON</span>"\
 	 "<span foreground='#53ff1a' size='small'>$rx_rate</span>"\
 	 "<span foreground='$color_down'>$fa_caret_down</span>"\
 	 "<span foreground='#53ff1a' size='small'>$tx_rate</span>"\

@@ -14,9 +14,9 @@ dom=`date '+%d'`
 mon=`date '+%b'`
 year=`date '+%Y'`
 
-echo -e "<span foreground='#48c9b0' size='x-large' font_desc='EmojiSymbols'>$fa_calendar_o</span>"\
+echo -e "<span foreground='#48c9b0' size='large' font_desc='EmojiSymbols'>$fa_calendar_o</span>"\
 	 "<span foreground='#fdfefe'>$dow</span>"\
-	 "<span foreground='#48c9b0' size='x-large'>$dom</span>"\
+	 "<span foreground='#48c9b0' size='large'>$dom</span>"\
 	 "<span foreground='#fdfefe'>$mon $year</span>"
 
 exit 0
