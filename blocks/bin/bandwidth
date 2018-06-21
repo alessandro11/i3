@@ -34,7 +34,7 @@ GetHummanReadble() {
         unit="GB/s"
 	fi
 
-    printf "%03d%s" "$ret" "$unit"
+    printf "%4s%s" "$ret" "$unit"
 }
 
 GetIcon() {
