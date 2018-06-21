@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+
+# BUG: THRE IS NO WAY TO SOURCE A FILE.
+#      i3blocks does not even respect which environment
+# that is running the script, always run with user default
+# shell script.
+# ANY VARS DECLARED IN ANOTHER SOURCE FILE WON'T WORK.
+# . sys.conf
+
+fa_calendar_o='\U000f133'
+
+dow=`date '+%a'`
+date=`date '+%D'`
+
+echo -e "<span foreground='#48c9b0' size='large' font_desc='EmojiSymbols'>$fa_calendar_o</span>"\
+	 "<span foreground='#fdfefe' size='small'>$dow</span>"\
+	 "<span foreground='#fdfefe' size='small'>$date</span>"
+
+exit 0
