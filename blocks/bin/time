@@ -19,6 +19,6 @@ if [ $(($sec % 2)) -eq 0 ]; then
 fi
 
 echo -e "<span foreground='#53ff1a' size='large' font_desc='EmojiSymbols'>$fa_clock_o</span>"\
-	 "<span foreground='#53ff1a' size='large' font_desc='EmojiSymbols'>$hour_min</span><span foreground='$color' size='small'>:</span><span foreground='#53ff1a' size='x-small'>$sec</span>"
+	    "<span foreground='#53ff1a' size='large'>$hour_min</span><span foreground='$color' size='small'>:</span><span foreground='#53ff1a' size='x-small'>$sec</span>"
 
 exit 0

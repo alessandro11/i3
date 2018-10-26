@@ -12,7 +12,7 @@ fa_tasks='\U000f0ae'
 load=`uptime | grep --only-matching 'load average:.*'`
 load=${load#load average: *}
 
-echo -e "<span foreground='#48c9b0' size='large'>$fa_tasks</span>"\
+echo -e "<span foreground='#53ff1a' size='large'>$fa_tasks</span>"\
 	 "<span foreground='#53ff1a' size='small'>$load</span>"
 
 exit 0

@@ -77,7 +77,7 @@ get_memory_stats() {
 }
 
 
-NOTIFY="<span foreground='cyan' size='large'>$fa_microship</span> <span foreground='#53ff1a' size='small'>$(get_memory_stats mem)</span>"
+NOTIFY="<span foreground='#53ff1a' size='large'>$fa_microship</span> <span foreground='#53ff1a' size='small'>$(get_memory_stats mem)</span>"
 
 SWAP="$(get_memory_stats swap)"
 TX="`echo "$SWAP" | cut -d' ' -f2`"
