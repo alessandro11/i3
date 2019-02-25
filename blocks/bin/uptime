@@ -7,10 +7,13 @@
 # ANY VARS DECLARED IN ANOTHER SOURCE FILE WON'T WORK.
 # . sys.conf
 
-fa_power_off='\U000f011'
-fa_plug='\U000f1e6'
+# Those two icons are working in 4.7 fonts-qwesome
+#fa_power_off='\U000f1e6'
+#fa_plug='\U000f1e6'
+fa_bolt='\U000f0e7'
 
-echo -e "<span foreground='#53ff1a' size='large' font_desc='EmojiSymbols'>$fa_plug</span>"\
+
+echo -e "<span foreground='#53ff1a' size='large' font_desc='EmojiSymbols'>$fa_bolt</span>"\
 	 "<span foreground='#53ff1a' size='small' font_desc='EmojiSymbols'>$(uptime --pretty)</span>"
 
 exit 0

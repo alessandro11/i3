@@ -7,16 +7,16 @@
 # ANY VARS DECLARED IN ANOTHER SOURCE FILE WON'T WORK.
 # . sys.conf
 
-fa_calendar_o='\U000f133'
+fa_calendar='\U000f073'
 
 dow=`date '+%a'`
 dom=`date '+%d'`
 mon=`date '+%b'`
 year=`date '+%Y'`
 
-echo -e "<span foreground='#48c9b0' size='x-large' font_desc='EmojiSymbols'>$fa_calendar_o</span>"\
+echo -e "<span foreground='#48c9b0' size='large' font_desc='EmojiSymbols'>$fa_calendar</span>"\
 	 "<span foreground='#fdfefe'>$dow</span>"\
-	 "<span foreground='#48c9b0' size='x-large'>$dom</span>"\
+	 "<span foreground='#48c9b0' size='large'>$dom</span>"\
 	 "<span foreground='#fdfefe'>$mon $year</span>"
 
 exit 0

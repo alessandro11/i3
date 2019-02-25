@@ -12,5 +12,5 @@ fa_window_maximize='\U000f2d0'
 WIN_NAME=`xdotool getactivewindow getwindowname`
 INSTANCE_NAME=$(xprop -id `xprop -root _NET_ACTIVE_WINDOW | cut -d' ' -f5` WM_CLASS | cut -d ' ' -f4)
 
-echo -e "<span foreground='#53ff1a' size='large' font_desc='EmojiSymbols'>$fa_window_maximize</span>"\
-	 "<span foreground='#53ff1a' size='large' font_desc='EmojiSymbols'>$INSTANCE_NAME - $WIN_NAME</span>"\
+echo -e "<span foreground='#53ff1a' size='small' font_desc='EmojiSymbols'>$fa_window_maximize</span>"\
+	 "<span foreground='#53ff1a' size='x-small' font_desc='EmojiSymbols'>$INSTANCE_NAME - $WIN_NAME</span>"\
