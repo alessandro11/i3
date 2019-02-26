@@ -33,9 +33,9 @@ assign [instance="dinf"] "6:remote"
 assign [instance="Mail"] "5:mail"
 assign [class="Emacs"] "4:edit"
 #assign [class="libreoffice-writer"] "4:edit"
-assign [class="Gvncviewer"] "2"
-assign [class="Spicy"] "2"
-for_window [class="Spicy"] fullscreen enable
+assign [class="Gvncviewer"] 5
+assign [class="spicy"] 5
+for_window [class="spicy"] fullscreen enable
 
 assign [class="Emulator"] "10:URxvt"
 for_window [class="Emulator"] floating enable move right 900px, move down 30px 
