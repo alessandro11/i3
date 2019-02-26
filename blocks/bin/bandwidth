@@ -41,7 +41,7 @@ GetIcon() {
         icon="$fa_wifi"
     fi
 
-    echo "$icon"        
+    echo "$icon"
 }
 
 IFACE=$(ip -o route show default | awk '{print $5}')
