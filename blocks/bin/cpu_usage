@@ -74,7 +74,7 @@ fi
 echo -e "<span foreground='red' size='large' font_desc='EmojiSymbols'>$fa_gears</span>"\
 	 "<span foreground='$cpu_usage_color' size='small'>$(cpu)</span>"\
 	 "<span foreground='$color' size='large' font_desc='EmojiSymbols'>$icon</span>"\
-	 "<span foreground='$color' size='small' font_desc='EmojiSymbols'>$mean_t°C</span>"\
-	 "<span foreground='#53ff1a' size='x-small' font_desc='fontawesome-regular'>$fa_modx $(cpu_fan) RPM</span>"
+	 "<span foreground='$color' size='small' font_desc='EmojiSymbols'>$mean_t°C</span>"
+#	 "<span foreground='#53ff1a' size='x-small' font_desc='fontawesome-regular'>$fa_modx $(cpu_fan) RPM</span>"
 
 exit 0

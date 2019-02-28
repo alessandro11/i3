@@ -12,6 +12,7 @@
 set $mod Mod4
 
 default_orientation horizontal
+workspace_layout tabbed
 
 workspace "1:www" output VGA-1
 workspace 2 output VGA-1
@@ -21,7 +22,7 @@ workspace "5:remote" output VGA-1
 #
 workspace "10:URxvt" output HDMI-1
 workspace 9 output HDMI-1
-workspace 8 output HDMI-1
+workspace "8:edit" output HDMI-1
 workspace 7 output HDMI-1
 workspace "6:email" output HDMI-1
 
@@ -29,9 +30,9 @@ workspace "6:email" output HDMI-1
 # Assignments
 #assign [class="gnuplot_qt"] 0
 #assign [class="Gnuplot*"] 0
-assign [instance="dinf"] "6:remote"
-assign [instance="Mail"] "5:mail"
-assign [class="Emacs"] "4:edit"
+assign [instance="dinf"] "5:remote"
+assign [instance="Mail"] "6:mail"
+assign [class="Emacs"] "8:edit"
 #assign [class="libreoffice-writer"] "4:edit"
 assign [class="Gvncviewer"] "2"
 assign [class="Spicy"] "2"

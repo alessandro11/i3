@@ -29,7 +29,7 @@ GetHummanReadble() {
 		ret="$(($val / 1073741824))GB/s"
 	fi
 
-	echo "$ret"
+	printf "%7s" "$ret"
 }
 
 [ ! -f "/tmp/rx_tx_bytes" ] && echo 0 > "/tmp/rx_tx_bytes"
