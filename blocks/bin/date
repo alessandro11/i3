@@ -7,7 +7,8 @@
 # ANY VARS DECLARED IN ANOTHER SOURCE FILE WON'T WORK.
 # . sys.conf
 
-fa_calendar_o='\U000f133'
+#fa_calendar_o='\U000f133'
+fa_calendar_o='\U000f073'
 
 dow=`date '+%a'`
 dom=`date '+%d'`
