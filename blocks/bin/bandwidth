@@ -30,7 +30,7 @@ GetHummanReadble() {
 		ret="$(($bytes / 1073741824))GB/s"
 	fi
 
-    printf "%7s" "$ret"
+    printf "%8s" "$ret"
 }
 
 GetIcon() {
@@ -71,7 +71,7 @@ rx_rate=$(GetHummanReadble $rx_rate)
 tx_rate=$(GetHummanReadble $tx_rate)
 
 echo -e "<span foreground='#53ff1a' size='large'>$ICON</span>"\
-	 "<span foreground='#53ff1a' size='small'>$rx_rate</span>"\
+     "<span foreground='#53ff1a' size='small'>$rx_rate</span>"\
 	 "<span foreground='$color_down'>$fa_caret_down</span>"\
 	 "<span foreground='#53ff1a' size='small'>$tx_rate</span>"\
 	 "<span foreground='$color_up'>$fa_caret_up</span>"
