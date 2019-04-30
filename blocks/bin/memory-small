@@ -1,0 +1,93 @@
+#!/bin/sh
+# Copyright (C) 2014 Julien Bonjean <julien@bonjean.info>
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# BUG: THRE IS NO WAY TO SOURCE A FILE.
+#      i3blocks does not even respect which environment
+# that is running the script, always run with user default
+# shell script.
+# ANY VARS DECLARED IN ANOTHER SOURCE FILE WON'T WORK.
+# . sys.conf
+
+fa_microship='\U000f2db'
+fa_exchange='\U000f0ec'
+DEFAULT_COLOR="#53ff1a"
+DEF_ICON_COLOR="#0066ff"
+GRAY="#808080"
+
+get_memory_stats() {
+	local type=$1
+
+	awk -v type=$type '
+		/^MemTotal:/ {
+			mem_total=$2
+		}
+		/^MemFree:/ {
+			mem_free=$2
+		}
+		/^Buffers:/ {
+			mem_free+=$2
+		}
+		/^Cached:/ {
+			mem_free+=$2
+		}
+		/^SwapTotal:/ {
+			swap_total=$2
+		}
+		/^SwapFree:/ {
+			swap_free=$2
+		}
+		END {
+			if (type == "swap") {
+			   free=swap_free/1024/1024
+			   used=(swap_total-swap_free)/1024/1024
+			   total=swap_total/1024/1024
+			} else {
+			   free=mem_free/1024/1024
+			   used=(mem_total-mem_free)/1024/1024
+			   total=mem_total/1024/1024
+		    }
+			pct=used/total*100
+
+			# full text
+			printf("%.1fG/%.1fG %.f%%\n", used, total, pct)
+
+			# short text
+			#printf("%.f%%\n", pct)
+
+			# color
+			# if (pct > 90) {
+			# 	print("#FF0000\n")
+			# } else if (pct > 80) {
+			# 	print("#FFAE00\n")
+			# } else if (pct > 70) {
+			# 	print("#FFF600\n")
+			# }
+	    }
+		' /proc/meminfo
+}
+
+
+NOTIFY="<span foreground='$DEF_ICON_COLOR' size='small'>$fa_microship</span> <span foreground='$GRAY' size='small'>$(get_memory_stats mem)</span>"
+
+SWAP="$(get_memory_stats swap)"
+TX="`echo "$SWAP" | cut -d' ' -f2`"
+if [ ${TX%%%*} -gt 0 ]; then
+	NOTIFY="${NOTIFY} <span foreground='$DEF_ICON_COLOR' size='small'>$fa_exchange</span> <span foreground='yellow' size='small'>$SWAP</span>"
+fi
+
+echo -e "$NOTIFY"
+
+exit 0

@@ -1,0 +1,23 @@
+#!/usr/bin/env sh
+
+# BUG: THRE IS NO WAY TO SOURCE A FILE.
+#      i3blocks does not even respect which environment
+# that is running the script, always run with user default
+# shell script.
+# ANY VARS DECLARED IN ANOTHER SOURCE FILE WON'T WORK.
+# . sys.conf
+
+fa_clock_o='\U000f017'
+
+hour_min=`date '+%T'`
+sec=${hour_min##[0-9]*:}
+hour_min=${hour_min%:*[0-9]}
+color='#fdfefe'
+
+if [ $(($sec % 2)) -eq 0 ]; then
+	color='#17202a'
+fi
+
+echo -e "<span foreground='#53ff1a'>$hour_min</span><span foreground='$color'>:</span><span foreground='#53ff1a' size='x-small'>$sec</span>"
+
+exit 0

@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+
+# BUG: THRE IS NO WAY TO SOURCE A FILE.
+#      i3blocks does not even respect which environment
+# that is running the script, always run with user default
+# shell script.
+# ANY VARS DECLARED IN ANOTHER SOURCE FILE WON'T WORK.
+# . sys.conf
+
+fa_window_maximize='\U000f2d0'
+DEFAULT_COLOR="#53ff1a"
+DEF_ICON_COLOR="#0066ff"
+GRAY="#808080"
+
+WIN_NAME=`xdotool getactivewindow getwindowname`
+INSTANCE_NAME=$(xprop -id `xprop -root _NET_ACTIVE_WINDOW | cut -d' ' -f5` WM_CLASS | cut -d ' ' -f4)
+
+echo -e "<span foreground='#48c9b0' size='small'>$fa_window_maximize</span>"\
+    	"<span foreground='white' size='small'>$INSTANCE_NAME - $WIN_NAME</span>"\

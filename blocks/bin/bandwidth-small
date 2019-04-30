@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+
+# BUG: THRE IS NO WAY TO SOURCE A FILE.
+#      i3blocks does not even respect which environment
+# that is running the script, always run with user default
+# shell script.
+# ANY VARS DECLARED IN ANOTHER SOURCE FILE WON'T WORK.
+# . sys.conf
+
+IFACE=""
+
+fa_sitemap='\U000f0e8'
+fa_wifi='\U000f1eb'
+fa_arrow_circle_o_down='\U000f01a'
+fa_caret_down='\U000f0d7'
+fa_caret_up='\U000f0d8'
+fa_arrow_circle_o_up='\U000f01b'
+DEFAULT_COLOR="#53ff1a"
+DEF_ICON_COLOR="#0066ff"
+GRAY="#808080"
+
+GetHummanReadble() {
+	local bytes=$1
+	local ret=""
+
+	if [ $bytes -lt 1024 ]; then # less than KB
+		ret="${bytes}B/s"
+	elif [ $bytes -lt 1048576 ]; then  # less than MB
+		ret="$(($bytes / 1024))KB/s"
+	elif [ $bytes -lt 1073741824 ]; then # less than GB
+		ret="$(($bytes / 1048576))MB/s"
+	else
+		ret="$(($bytes / 1073741824))GB/s"
+	fi
+
+    printf "%7s" "$ret"
+}
+
+GetIcon() {
+    local iface=$1 icon=""
+
+    icon="$fa_sitemap"
+    if [ -d "/sys/class/net/$iface/wireless" ]; then
+        icon="$fa_wifi"
+    fi
+
+    echo "$icon"
+}
+
+IFACE=$(ip -o route show default | awk '{print $5}')
+[ ! -f "/tmp/rx_tx_bytes" ] && echo 0 > "/tmp/rx_tx_bytes"
+
+if [ -z "$IFACE" ]; then
+    echo -e "<span foreground='#48c9b0' size='small'>$fa_sitemap</span>"\
+	        "<span foreground='#53ff1a' size='small'>None</span>"
+    exit 0
+fi
+
+rx_tx_old=(`cat /tmp/rx_tx_bytes`)
+bw=(`awk '/'"$IFACE"'/ {print $2, $10}' /proc/net/dev`)
+
+rx_rate=$((${bw[0]} - ${rx_tx_old[0]}))
+tx_rate=$((${bw[1]} - ${rx_tx_old[1]}))
+echo ${bw[@]} > "/tmp/rx_tx_bytes"
+
+color_up='#4dff4d'
+color_down='#ff0000'
+[ $rx_rate -eq 0 ] && color_down='#800000'
+[ $tx_rate -eq 0 ] && color_up='#004d00'
+
+ICON=$(GetIcon $IFACE)
+
+rx_rate=$(GetHummanReadble $rx_rate)
+tx_rate=$(GetHummanReadble $tx_rate)
+
+echo -e "<span foreground='$DEF_ICON_COLOR' size='small'>$ICON</span>"\
+     "<span foreground='$DEFAULT_COLOR' size='small'>$rx_rate</span>"\
+	 "<span foreground='$color_down'>$fa_caret_down</span>"\
+	 "<span foreground='$DEFAULT_COLOR' size='small'>$tx_rate</span>"\
+	 "<span foreground='$color_up'>$fa_caret_up</span>"
+
+exit 0

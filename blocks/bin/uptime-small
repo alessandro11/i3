@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+
+# BUG: THRE IS NO WAY TO SOURCE A FILE.
+#      i3blocks does not even respect which environment
+# that is running the script, always run with user default
+# shell script.
+# ANY VARS DECLARED IN ANOTHER SOURCE FILE WON'T WORK.
+# . sys.conf
+
+fa_power_off='\U000f011'
+fa_plug='\U000f1e6'
+
+echo -e "<span foreground='#53ff1a' size='large' font_desc='EmojiSymbols'>$fa_plug</span>"\
+	    "<span foreground='#53ff1a' size='small'>$(uptime --pretty)</span>"
+
+exit 0
