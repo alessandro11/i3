@@ -19,11 +19,11 @@ new_window pixel 1
 workspace_auto_back_and_forth yes
 
 # class                 border  backgr. text    indicator child_border
-client.focused          #00ff00 #333333 #ffffff #00ff00   #00ff00
-client.focused_inactive #333333 #000000 #ffffff #484e50   #00ff00
-client.unfocused        #333333 #222222 #595959 #292d2e   #00ff00
-client.urgent           #2f343a #900000 #ffffff #900000   #00ff00
-client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+client.focused          #00ff00 #000000 #ffffff #0000ff   #00ff00
+client.focused_inactive #00ff00 #000000 #ffffff #000080   #00ff00
+client.unfocused        #001a00 #222222 #595959 #000080   #001a00
+client.urgent           #ff0000 #900000 #ffffff #900000   #00ff00
+client.placeholder      #000000 #0c0c0c #ffffff #0000ff   #ff0000
 
 client.background       #000000
 
@@ -62,8 +62,8 @@ for_window [class="Emulator"] floating enable move right 900px, move down 30px
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 10
-#font pango:xft:xos4 Terminus:style=Normal:pixelsize=10:antialias=true:hinting=true
+#font pango:DejaVu Sans Mono 10
+font pango:xft:xos4 Terminus:style=Normal:pixelsize=10:antialias=true:hinting=true
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -204,56 +204,56 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
     font pango:DejaVu Sans Mono 10
-    output DP1
-    mode dock
+    output eDP1
     position top
-    workspace_buttons yes
-    status_command i3blocks -c $HOME/.config/i3/i3blocks-nobattery.conf
+    status_command i3blocks -c $HOME/.config/i3/i3blocks-eDP1-DP1-BAT.conf
     tray_output none
     colors {
-    	background #000000
-	    statusline #605c5a
-        # Item              border   bg   fg
-        # active_workspace occurrs when workpsace has no focus, highlight
-        #   workspace that was focused
-	    active_workspace #008066 #000000 #66ff66        
-        # Actual workpsace active
-    	focused_workspace #80ffe5 #000000 #33ff33
-        
-        inactive_workspace #1f1f1f #000000 #004d00
-        urgent_workspace #2e3436 #9a878f
-    } 
+           background #000000
+           statusline #cccc00
+           # Item              border   bg   fg
+           # active_workspace occurrs when workpsace has no focus, highlight
+           #   workspace that was focused
+           active_workspace #008066 #000000 #66ff66        
+           # Actual workpsace active
+           focused_workspace #80ffe5 #000000 #33ff33
+
+           inactive_workspace #1f1f1f #000000 #004d00
+           urgent_workspace #2e3436 #9a878f
+    }
 }
 
 bar {
     font pango:DejaVu Sans Mono 10
-    output eDP1
+    output DP1
+    mode dock
     position top
-    #status_command $HOME/.config-scripts/dock/clock.py
-    status_command i3blocks -c $HOME/.config/i3/i3blocks.conf
+    workspace_buttons yes
+    status_command i3blocks -c $HOME/.config/i3/i3blocks-DP1-eDP1-BAT.conf
     tray_output none
     colors {
-    	background #000000
-    	statusline #605c5a
-        # Item              border   bg   fg
-        # active_workspace occurrs when workpsace has no focus, highlight
-        #   workspace that was focused
-	    active_workspace #008066 #000000 #00ff00
-        # Actual workpsace active
-    	focused_workspace #80ffe5 #000000 #00ff00
-        inactive_workspace #1f1f1f #222222 #00800
-        urgent_workspace #2e3436 #9a878f
-    } 
+           background #000000
+           statusline #cccc00
+           # Item              border   bg   fg
+           # active_workspace occurrs when workpsace has no focus, highlight
+           #   workspace that was focused
+           active_workspace #008066 #000000 #66ff66        
+           # Actual workpsace active
+           focused_workspace #80ffe5 #000000 #33ff33
 
+           inactive_workspace #1f1f1f #000000 #004d00
+           urgent_workspace #2e3436 #9a878f
+    }
+    
 }
 
 # Press $mod+o followed by either f, t, Esc or Return to launch firefox,
 # thunderbird or return to the default mode, respectively.
-set $mode_launcher Launch: [c]hromium [f]irefox [t]hunderbird [e]macs
+set $mode_launcher Launch: [q]utebrowser [f]irefox [t]hunderbird [e]macs
 bindsym $mod+o mode "$mode_launcher"
 
 mode "$mode_launcher" {
-    bindsym c exec chromium
+    bindsym q exec qutebrowser
     bindsym f exec firefox
     bindsym t exec thunderbird
     bindsym e exec emacs
