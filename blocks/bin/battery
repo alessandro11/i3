@@ -16,6 +16,7 @@ fa_plug='\U000f1e6'
 fa_ban='\U000f05e'
 
 DEFAULT_FGCOLOR='#53ff1a'
+DEF_ICON_COLOR="#0066ff"
 
 toggle_color() {
 	local num=0, color="$1"
@@ -42,14 +43,13 @@ get_icon() {
 }
 
 if [ ! -d "/sys/class/power_supply/BAT0" ]; then
-	echo -e "<span foreground='$DEFAULT_FGCOLOR' size='large' font_desc='EmojiSymbols'>${fa_ban}${fa_battery_empty}</span>"
+	echo -e "<span foreground='$DEF_ICON_COLOR' size='large'>${fa_ban}${fa_battery_empty}</span>"
 
 	exit 0
 fi
 
 CAPACITY=`cat /sys/class/power_supply/BAT0/capacity`
-#CAPACITY=76
-COLOR="$DEFAULT_FGCOLOR"
+COLOR="$DEF_ICON_COLOR"
 ICON=""
 DESCRIPTION=""
 
@@ -58,8 +58,7 @@ STATUS=`cat /sys/class/power_supply/BAT0/status`
 DESCRIPTION="`acpi -b | awk -F',' '{print $3}'`"
 if [ "$STATUS" == "Charging" ]; then
 	ICON="$(get_icon)"
-	#DESCRIPTION="`acpi -b | grep -o '[0-9]*:[0-9]*:[0-9]*'` until charged"
-	NOTIFY="<span foreground='$COLOR' size='x-small' font_desc='EmojiSymbols'>$fa_plug</span><span foreground='$COLOR' size='large' font_desc='EmojiSymbols'> $(get_icon)</span><span foreground='$COLOR' size='small' font_desc='EmojiSymbols'> ${CAPACITY}%${DESCRIPTION}</span>"
+	NOTIFY="<span foreground='$DEFAULT_FGCOLOR' size='x-small'>$fa_plug</span><span foreground='$DEF_ICON_COLOR' size='large'> $(get_icon)</span><span foreground='$DEFAULT_FGCOLOR' size='small'> ${CAPACITY}%${DESCRIPTION} </span>"
 else
 	if [ $CAPACITY -le 10 ]; then
 		ICON="$fa_battery_empty"
@@ -74,7 +73,7 @@ else
 		ICON="$fa_battery_full"
 	fi
 
-	NOTIFY="<span foreground='$COLOR' size='large' font_desc='EmojiSymbols'>$ICON</span><span foreground='$COLOR' size='x-small' font_desc='EmojiSymbols'> $CAPACITY% $DESCRIPTION</span>"
+	NOTIFY="<span foreground='$DEF_ICON_COLOR' size='large'>$ICON</span><span foreground='$DEFAULT_FGCOLOR' size='x-small'> $CAPACITY% $DESCRIPTION </span>"
 
 fi
 

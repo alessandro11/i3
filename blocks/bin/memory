@@ -24,6 +24,10 @@
 fa_microship='\U000f2db'
 fa_exchange='\U000f0ec'
 
+DEFAULT_FGCOLOR="#53ff1a"
+DEF_ICON_COLOR="#0066ff"
+GRAY="#808080"
+
 get_memory_stats() {
 	local type=$1
 
@@ -77,12 +81,12 @@ get_memory_stats() {
 }
 
 
-NOTIFY="<span foreground='#53ff1a' size='large'>$fa_microship</span> <span foreground='#53ff1a' size='small'>$(get_memory_stats mem)</span>"
+NOTIFY="<span foreground='$DEF_ICON_COLOR' size='large'>$fa_microship</span> <span foreground='$DEFAULT_FGCOLOR' size='small'>$(get_memory_stats mem) </span>"
 
 SWAP="$(get_memory_stats swap)"
 TX="`echo "$SWAP" | cut -d' ' -f2`"
 if [ ${TX%%%*} -gt 0 ]; then
-	NOTIFY="${NOTIFY} <span foreground='#53ff1a' size='large'>$fa_exchange</span> <span foreground='#53ff1a' size='small'>$SWAP</span>"
+	NOTIFY="${NOTIFY} <span foreground='$DEF_ICON_COLOR' size='large'>$fa_exchange</span> <span foreground='$DEFAULT_FGCOLOR' size='small'>$SWAP </span>"
 fi
 
 echo -e "$NOTIFY"

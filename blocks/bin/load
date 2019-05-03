@@ -8,11 +8,14 @@
 # . sys.conf
 
 fa_tasks='\U000f0ae'
+DEFAULT_COLOR="#53ff1a"
+DEF_ICON_COLOR="#0066ff"
+GRAY="#808080"
 
 load=`uptime | grep --only-matching 'load average:.*'`
 load=${load#load average: *}
 
-echo -e "<span foreground='#53ff1a' size='large'>$fa_tasks</span>"\
-	 "<span foreground='#53ff1a' size='small'>$load</span>"
+echo -e "<span foreground='$DEF_ICON_COLOR' size='large'>$fa_tasks</span>"\
+	 "<span foreground='#53ff1a' size='small'>$load </span>"
 
 exit 0

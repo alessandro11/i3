@@ -12,14 +12,14 @@ fa_thermometer_quarter='\U000f2ca'
 fa_thermometer_3='\U000f2c8'
 fa_thermometer_half='\U000f2c9'
 fa_thermometer_full='\U000f2c7'
-
 fa_modx='\U000f285'
-
 fa_microship='\U000f2db'
-
 fa_gears='\U000f085'
 
 CHIP="coretemp-isa-0000"
+
+DEFAULT_COLOR="#53ff1a"
+DEF_ICON_COLOR="#0066ff"
 
 # Get average user usage of cpu
 cpu() {
@@ -58,23 +58,23 @@ temperature() {
 
 mean_t=$(temperature)
 if [[ $mean_t < 50.00 ]]; then
-	color='#53ff1a'
-	cpu_usage_color='#53ff1a'
 	icon="$fa_thermometer_0"
+	icon_color="$DEF_ICON_COLOR"
+	fgcolor="$DEFAULT_COLOR"
 elif [[ $mean_t < 60.00 ]]; then
-	color="yellow"
-	cpu_usage_color="yellow"
 	icon="$fa_thermometer_half"
+	icon_color="yellow"
+	fgcolor="yellow"
 else
-	color="red"
-	cpu_usage_color="red"
 	icon="$fa_thermometer_full"
+	icon_color="red"
+	fgcolor="red"
 fi
 
-echo -e "<span foreground='#53ff1a' size='large' font_desc='EmojiSymbols'>$fa_gears</span>"\
-	 "<span foreground='$cpu_usage_color' size='small'>$(cpu)</span>"\
-	 "<span foreground='$color' size='large' font_desc='EmojiSymbols'>$icon</span>"\
-	 "<span foreground='$color' size='small'>$mean_t°C</span>"
+echo -e "<span foreground='$icon_color' size='large'>$fa_gears</span>"\
+	 "<span foreground='$fgcolor' size='small'>$(cpu)</span>"\
+	 "<span foreground='$icon_color' size='large'>$icon</span>"\
+	 "<span foreground='$fgcolor' size='small'>$mean_t°C </span>"
 #	 "<span foreground='#53ff1a' size='x-small' font_desc='fontawesome-regular'>$fa_modx</span>"
 #	 "<span foreground='#53ff1a' size='x-small'>$(cpu_fan) RPM</span>"
 
