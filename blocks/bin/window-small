@@ -12,8 +12,27 @@ DEFAULT_COLOR="#53ff1a"
 DEF_ICON_COLOR="#0066ff"
 GRAY="#808080"
 
-WIN_NAME=`xdotool getactivewindow getwindowname`
+no_quotes() {
+	local str=$1
+
+	echo "$(tr -d '\"'<<<$str)"
+}
+
+trunc() {
+    local str="$@"
+
+	if [ ${#str} -gt 25 ]; then
+		echo -n "${str:0:26}..."
+	else
+		echo -n "$str"
+	fi
+}
+
 INSTANCE_NAME=$(xprop -id `xprop -root _NET_ACTIVE_WINDOW | cut -d' ' -f5` WM_CLASS | cut -d ' ' -f4)
+WIN_TITLE="$(no_quotes $INSTANCE_NAME)"
+
+WIN_TITLE="${WIN_TITLE} - $(xdotool getactivewindow getwindowname)"
+WIN_TITLE="$(trunc \"$WIN_TITLE\")"
 
 echo -e "<span foreground='#48c9b0' size='small'>$fa_window_maximize</span>"\
-    	"<span foreground='white' size='small'>$INSTANCE_NAME - $WIN_NAME</span>"\
+    	"<span foreground='white' size='small'>$WIN_TITLE </span>"\
