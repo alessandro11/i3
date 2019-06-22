@@ -24,9 +24,10 @@
 fa_microship='\U000f2db'
 fa_exchange='\U000f0ec'
 
-DEFAULT_FGCOLOR="#53ff1a"
-DEF_ICON_COLOR="#0066ff"
 GRAY="#808080"
+#DEFAULT_FGCOLOR="#53ff1a"
+DEFAULT_FGCOLOR="$GRAY"
+DEF_ICON_COLOR="$GRAY"
 
 get_memory_stats() {
 	local type=$1

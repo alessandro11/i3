@@ -8,6 +8,7 @@
 # . sys.conf
 
 fa_window_maximize='\U000f2d0'
+
 DEFAULT_COLOR="#53ff1a"
 DEF_ICON_COLOR="#0066ff"
 GRAY="#808080"
@@ -35,4 +36,4 @@ WIN_TITLE="${WIN_TITLE} - $(xdotool getactivewindow getwindowname)"
 WIN_TITLE="$(trunc \"$WIN_TITLE\")"
 
 echo -e "<span foreground='#48c9b0' size='small'>$fa_window_maximize</span>"\
-    	"<span foreground='white' size='small'>$WIN_TITLE </span>"\
+    	"<span foreground='white' size='small'>$WIN_TITLE</span>"\

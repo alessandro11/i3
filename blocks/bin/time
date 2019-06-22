@@ -14,9 +14,10 @@ sec=${hour_min##[0-9]*:}
 hour_min=${hour_min%:*[0-9]}
 color='#fdfefe'
 
-DEFAULT_COLOR="#53ff1a"
-DEF_ICON_COLOR="#0066ff"
 DARK_GRAY="#17202a"
+GRAY="#808080"
+DEFAULT_COLOR="#53ff1a"
+DEF_ICON_COLOR="$DEFAULT_COLOR"
 
 if [ $(($sec % 2)) -eq 0 ]; then
 	color="$DARK_GRAY"

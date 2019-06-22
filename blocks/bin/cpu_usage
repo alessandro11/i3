@@ -19,7 +19,7 @@ fa_gears='\U000f085'
 CHIP="coretemp-isa-0000"
 
 DEFAULT_COLOR="#53ff1a"
-DEF_ICON_COLOR="#0066ff"
+DEF_ICON_COLOR="#53ff1a"
 
 # Get average user usage of cpu
 cpu() {

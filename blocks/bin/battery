@@ -15,8 +15,8 @@ fa_battery_full='\U000f240'
 fa_plug='\U000f1e6'
 fa_ban='\U000f05e'
 
-DEFAULT_FGCOLOR='#53ff1a'
-DEF_ICON_COLOR="#0066ff"
+DEFAULT_FGCOLOR="#53ff1a"
+DEF_ICON_COLOR="#53ff1a"
 
 toggle_color() {
 	local num=0, color="$1"

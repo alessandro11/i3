@@ -8,6 +8,10 @@
 # . sys.conf
 
 fa_clock_o='\U000f017'
+DEFAULT_FGCOLOR="#53ff1a"
+DEF_ICON_COLOR="#0066ff"
+DEF_ICON_COLOR="$DEFAULT_FGCOLOR"
+GRAY="#808080"
 
 hour_min=`date '+%T'`
 sec=${hour_min##[0-9]*:}
@@ -18,6 +22,6 @@ if [ $(($sec % 2)) -eq 0 ]; then
 	color='#17202a'
 fi
 
-echo -e "<span foreground='#53ff1a'>$hour_min</span><span foreground='$color'>:</span><span foreground='#53ff1a' size='x-small'>$sec</span>"
+echo -e "<span foreground='$DEFAULT_FGCOLOR'>$hour_min</span><span foreground='$color'>:</span><span foreground='$DEFAULT_FGCOLOR' size='x-small'>$sec</span>"
 
 exit 0

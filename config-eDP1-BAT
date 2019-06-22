@@ -31,7 +31,7 @@ workspace 7 output eDP1
 #assign [class="Gnuplot*"] 0
 assign [instance="dinf"] "6"
 assign [instance="Mail"] "5"
-assign [class="Emacs"] "2"
+assign [class="Emacs"] "4"
 #assign [class="libreoffice-writer"] "4:edit"
 
 assign [class="Spicy"] "10"

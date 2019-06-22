@@ -8,8 +8,9 @@
 # . sys.conf
 
 fa_tasks='\U000f0ae'
-DEFAULT_COLOR="#53ff1a"
-DEF_ICON_COLOR="#0066ff"
+DEFAULT_FGCOLOR="#53ff1a"
+#DEF_ICON_COLOR="#0066ff"
+DEF_ICON_COLOR="$DEFAULT_FGCOLOR"
 GRAY="#808080"
 
 load=`uptime | grep --only-matching 'load average:.*'`
