@@ -50,6 +50,7 @@ assign [class="Emacs"] "5"
 #assign [class="libreoffice-writer"] "4"
 assign [class="Gvncviewer"] "0"
 assign [class="Spicy"] "0"
+assign [title="neomutt"] "0"
 for_window [class="Spicy"] fullscreen enable
 
 assign [class="Emulator"] "0"
@@ -252,13 +253,13 @@ bar {
 
 # Press $mod+o followed by either f, t, Esc or Return to launch firefox,
 # thunderbird or return to the default mode, respectively.
-set $mode_launcher Launch: [q]utebrowser [f]irefox [t]hunderbird [e]macs
+set $mode_launcher Launch: [c]chromium [f]irefox [m]utt [e]macs
 bindsym $mod+o mode "$mode_launcher"
 
 mode "$mode_launcher" {
-    bindsym q exec qutebrowser
+    bindsym c exec /usr/bin/chromium
     bindsym f exec firefox
-    bindsym t exec thunderbird
+    bindsym m exec urxvt -fn 'xft:inconsolata:style=normal:pixelsize=18:antialias=true:hinting=true' -e /usr/bin/neomutt
     bindsym e exec emacs
 
     bindsym Esc mode "default"
