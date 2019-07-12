@@ -15,13 +15,13 @@ default_orientation Horizontal
 
 # MINE:
 # Window configurations.
-new_window pixel 1
+new_window pixel 2
 workspace_auto_back_and_forth yes
 
 # class                 border  backgr. text    indicator child_border
-client.focused          #00ff00 #000000 #ffffff #0000ff   #00ff00
-client.focused_inactive #00ff00 #000000 #ffffff #000080   #00ff00
-client.unfocused        #001a00 #222222 #595959 #000080   #001a00
+client.focused          #0000dc #000000 #ffffff #ffa500   #0000dc
+client.focused_inactive #000078 #000000 #ffffff #000080   #000078
+client.unfocused        #000078 #222222 #595959 #000080   #000078
 client.urgent           #ff0000 #900000 #ffffff #900000   #00ff00
 client.placeholder      #000000 #0c0c0c #ffffff #0000ff   #ff0000
 
