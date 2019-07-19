@@ -21,8 +21,8 @@ no_quotes() {
 trunc() {
         local str=$@
 
-		if [ "${#str}" -gt 40 ]; then
-			echo -n "${str:0:37}..."
+		if [ "${#str}" -gt 50 ]; then
+			echo -n "${str:0:47}..."
 		else
 			echo -n "$str"
 		fi
