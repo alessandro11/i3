@@ -15,6 +15,6 @@ date=`date '+%D'`
 
 echo -e "<span foreground='#48c9b0' size='small' font_desc='EmojiSymbols'>$fa_calendar_o</span>"\
 	 "<span foreground='#fdfefe' size='small'>$dow</span>"\
-	 "<span foreground='#fdfefe' size='small'>$date</span>"
+	 "<span foreground='#fdfefe' size='small'>$date</span> "
 
 exit 0
