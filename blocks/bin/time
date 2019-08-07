@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # BUG: THRE IS NO WAY TO SOURCE A FILE.
 #      i3blocks does not even respect which environment
@@ -7,7 +7,9 @@
 # ANY VARS DECLARED IN ANOTHER SOURCE FILE WON'T WORK.
 # . sys.conf
 
-fa_clock_o='\U000f017'
+fa_circle_o='\U000f10c'
+#fa_clock_o='\U000f017'
+fa_clock_o=$fa_circle_o
 
 hour_min=`date '+%T'`
 sec=${hour_min##[0-9]*:}

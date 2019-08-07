@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -x
+
 # BUG: THRE IS NO WAY TO SOURCE A FILE.
 #      i3blocks does not even respect which environment
 # that is running the script, always run with user default
@@ -54,7 +56,7 @@ GetIcon() {
     echo "$icon"
 }
 
-IFACE=$(ip -o route show default | awk '{print $5}')
+IFACE=$(ip -o route show default | awk '{print $5}'|head -1)
 [ ! -f "/tmp/rx_tx_bytes" ] && echo 0 > "/tmp/rx_tx_bytes"
 
 if [ -z "$IFACE" ]; then

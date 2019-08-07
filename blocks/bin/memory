@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Copyright (C) 2014 Julien Bonjean <julien@bonjean.info>
 
 # This program is free software: you can redistribute it and/or modify
@@ -25,9 +25,10 @@ fa_microship='\U000f2db'
 fa_exchange='\U000f0ec'
 
 GRAY="#808080"
-#DEFAULT_FGCOLOR="#53ff1a"
-DEFAULT_FGCOLOR="$GRAY"
-DEF_ICON_COLOR="$GRAY"
+DEFAULT_FGCOLOR="#53ff1a"
+#DEFAULT_FGCOLOR="$GRAY"
+#DEF_ICON_COLOR="$GRAY"
+DEF_ICON_COLOR="#53ff1a"
 
 get_memory_stats() {
 	local type=$1

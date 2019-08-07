@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # BUG: THRE IS NO WAY TO SOURCE A FILE.
 #      i3blocks does not even respect which environment
@@ -8,10 +8,15 @@
 # . sys.conf
 
 fa_hdd_o='\U000f0a0'
+GRAY="#808080"
+#DEFAULT_COLOR="#53ff1a"
+DEFAULT_COLOR="$GRAY"
+#DEF_ICON_COLOR="#0066ff"
+DEF_ICON_COLOR="$GRAY"
 
 tx_used=`df --local --human-readable --output=target,used,size,pcent | awk '/^[/] / {printf("%s/%s %s", $2, $3, $4)}'`
 
-echo -e "<span foreground='#53ff1a' size='large'>$fa_hdd_o</span>"\
-	 "<span foreground='#53ff1a' size='small'>$tx_used</span>"
+echo -e "<span foreground='$DEF_ICON_COLOR' size='large'>$fa_hdd_o</span>"\
+	 "<span foreground='$DEFAULT_COLOR' size='small'>$tx_used</span>"
 
 exit 0
