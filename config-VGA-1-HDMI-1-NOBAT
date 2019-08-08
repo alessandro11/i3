@@ -11,8 +11,6 @@
 
 set $mod Mod4
 
-default_orientation Horizontal
-
 # MINE:
 # Window configurations.
 new_window pixel 2
@@ -26,6 +24,10 @@ client.urgent           #ff0000 #900000 #ffffff #900000   #00ff00
 client.placeholder      #000000 #0c0c0c #ffffff #0000ff   #ff0000
 
 client.background       #000000
+
+
+default_orientation vertical
+workspace_layout default
 
 workspace "0:www" output VGA-1
 workspace 1 output VGA-1
