@@ -50,8 +50,8 @@ assign [instance="dinf"] "0"
 assign [instance="Mail"] "6"
 assign [class="Emacs"] "8"
 #assign [class="libreoffice-writer"] "4"
-assign [class="Gvncviewer"] "10"
-assign [class="Spicy"] "10"
+assign [class="Gvncviewer"] "2"
+assign [class="Spicy"] "2"
 assign [title="neomutt"] "6"
 for_window [class="Spicy"] fullscreen enable
 assign [class="Emulator"] "10"
@@ -223,7 +223,7 @@ bar {
            # Actual workpsace active
            focused_workspace #80ffe5 #000000 #33ff33
 
-           inactive_workspace #1f1f1f #000000 #004d00
+           inactive_workspace #1f1f1f #000000 #007000
            urgent_workspace #2e3436 #9a878f
     }
 }
@@ -246,7 +246,7 @@ bar {
            # Actual workpsace active
            focused_workspace #80ffe5 #000000 #33ff33
 
-           inactive_workspace #1f1f1f #000000 #004d00
+           inactive_workspace #1f1f1f #000000 #007000
            urgent_workspace #2e3436 #9a878f
     }
     
