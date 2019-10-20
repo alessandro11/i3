@@ -18,7 +18,12 @@ sec=${hour_min##[0-9]*:}
 hour_min=${hour_min%:*[0-9]}
 color='#fdfefe'
 
-if [ $(($sec % 2)) -eq 0 ]; then
+#
+# Bash interprets 08 and 09 as octal, so it raises the following error:
+#     *sh: 08: value too great for base (error token is "08")*
+# So the approach below forces to use base 10 %((10#...
+#
+if [ $((10#$sec % 2)) -eq 0 ]; then
 	color='#17202a'
 fi
 
