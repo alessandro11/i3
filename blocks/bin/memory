@@ -52,19 +52,33 @@ get_memory_stats() {
 			swap_free=$2
 		}
 		END {
-			if (type == "swap") {
-			   free=swap_free/1024/1024
-			   used=(swap_total-swap_free)/1024/1024
-			   total=swap_total/1024/1024
-			} else {
-			   free=mem_free/1024/1024
-			   used=(mem_total-mem_free)/1024/1024
-			   total=mem_total/1024/1024
-		    }
-			pct=used/total*100
+            switch (type) {
+            case "swap":
+                 #swap_total=1048576
+                 if (swap_total != 0) {
+                    swap_free=524288
+			        free=swap_free
+			        used=swap_total-swap_free
+			        total=swap_total
+                 } else {
+                   used  = 0;
+                   total = 0.1;  # force not division by 0
+                   pct   = 0;
+                 }
+            break
+
+            case "mem":
+			   free=mem_free
+			   used=mem_total-mem_free
+			   total=mem_total
+            break
+            default:
+            break
+            }
+			pct=(used/total)*100
 
 			# full text
-			printf("%.1fG/%.1fG %.f%%\n", used, total, pct)
+			printf("%u %u %.1f%%\n", used, total, pct)
 
 			# short text
 			#printf("%.f%%\n", pct)
@@ -81,15 +95,54 @@ get_memory_stats() {
 		' /proc/meminfo
 }
 
+#
+# Description:
+#   This function returns the value passed as $1 in:
+#   KB, MB and GB
+#
+# param:
+#   $1 - value in KB (/proc/meminfo always returns in KB).
+#
+# return: string with value in KB, MB and GB with units at end.
+#
+GetHummanReadble() {
+	local KB=$1
+	local ret=""
 
-NOTIFY="<span foreground='$DEF_ICON_COLOR' size='large'>$fa_microship</span> <span foreground='$DEFAULT_FGCOLOR' size='small'>$(get_memory_stats mem) </span>"
+	if [ $KB -le 1024 ]; then      # less or equal than MB, it is KB
+        ret="${KB} KB"
+	elif [ $KB -le 1048576 ]; then # less or equal than GB, it is MB
+		ret=$(echo "scale=2; $KB / 1024" | bc -l)
+        ret="${ret} MB"
+	else                           # it is GB
+        ret=$(echo "scale=2; $KB / 1048576" | bc -l)
+        ret="${ret} GB"
+    fi
 
-SWAP="$(get_memory_stats swap)"
-TX="`echo "$SWAP" | cut -d' ' -f2`"
-if [ ${TX%%%*} -gt 0 ]; then
-	NOTIFY="${NOTIFY} <span foreground='$DEF_ICON_COLOR' size='large'>$fa_exchange</span> <span foreground='$DEFAULT_FGCOLOR' size='small'>$SWAP </span>"
+    echo "$ret"
+}
+
+#
+# Get memory usage
+#
+read used total rate_used <<<$(get_memory_stats mem)
+mem_usage="$(GetHummanReadble $used)/$(GetHummanReadble $total) $rate_used"
+
+#
+# Build output notifucation
+#
+notify="<span foreground='$DEF_ICON_COLOR' size='large'>$fa_microship</span> <span foreground='$DEFAULT_FGCOLOR' size='small'>$mem_usage </span>"
+
+#
+# Get swap usage
+#
+read used total rate_used <<<$(get_memory_stats swap)
+if [ $used -gt 0 ]; then
+    swap_usage="$(GetHummanReadble $used)/$(GetHummanReadble $total) $rate_used"
+    # Build notification
+	notify="${notify} <span foreground='$DEF_ICON_COLOR' size='large'>$fa_exchange</span> <span foreground='$DEFAULT_FGCOLOR' size='small'>$swap_usage </span>"
 fi
 
-echo -e "$NOTIFY"
+echo -e "$notify"
 
 exit 0
