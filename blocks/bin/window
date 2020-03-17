@@ -28,6 +28,8 @@ trunc() {
 		fi
 }
 
+set -x
+#xprop -root _NET_ACTIVE_WINDOW
 INSTANCE_NAME=$(xprop -id `xprop -root _NET_ACTIVE_WINDOW | cut -d' ' -f5` WM_CLASS | cut -d ' ' -f4)
 WIN_TITLE="$(no_quotes $INSTANCE_NAME)"
 
